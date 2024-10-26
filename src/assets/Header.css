@@ -1,0 +1,6 @@
+header {
+    position: fixed;  /* Keeps header at the top */
+    top: 0;           /* Anchors header at top */
+    width: 100%;      /* Ensures it spans full width */
+    z-index: 1000;    /* Brings header above other elements */
+}
