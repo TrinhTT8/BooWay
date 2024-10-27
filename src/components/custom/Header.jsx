@@ -47,7 +47,7 @@ const Header = () => {
     onError: (error) => console.log(error),
   });
   return (
-    <header className="flex justify-between items-center px-8 py-4 shadow-md bg-white">
+    <header className="flex justify-between items-center px-8 py-4 shadow-md bg-zinc-900">
       <div>
         <img className="w-24 h-auto" src="/logo.png" alt="Logo" />
       </div>
