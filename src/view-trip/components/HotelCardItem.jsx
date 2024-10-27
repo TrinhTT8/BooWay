@@ -9,20 +9,23 @@ const HotelCardItem = ({ h }) => {
     h && GetPlacePhoto();
   }, [h]);
 
-  const GetPlacePhoto = async () => {
-    const data = {
-      textQuery: h?.name,
-    };
-    const result = await GetPlaceDetails(data).then((resp) => {
-      console.log(resp.data.places[0].photos[0].name);
-
-      const PhotoUrl = PHOTO_REF_URL.replace(
-        "{NAME}",
-        resp.data.places[1].photos[1].name
-      );
-      setPhotoUrl(PhotoUrl);
-    });
-  };
+ const GetPlacePhoto = async () => {
+    try {
+        const data = {
+            textQuery: h?.name,
+        };
+        const result = await GetPlaceDetails(data);
+        if (result.data.places.length > 0 && result.data.places[0].photos.length > 0) {
+            const photoName = result.data.places[0].photos[0].name;
+            const photoUrl = PHOTO_REF_URL.replace("{NAME}", photoName);
+            setPhotoUrl(photoUrl);
+        } else {
+            console.log("No photos found for this hotel.");
+        }
+    } catch (error) {
+        console.error("Error fetching place photo:", error);
+    }
+};
   return (
     <div>
       <Link
