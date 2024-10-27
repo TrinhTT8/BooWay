@@ -1,0 +1,106 @@
+.halloween-bg {
+    position: relative; /* Create a positioning context for the pseudo-element */
+    background-image: url('/public/halloween bg.jpg'); /* Path to your background image */
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
+    color: rgb(44, 38, 38); /* Ensure text color is visible on the background */
+}
+
+/* Create a dark overlay using a pseudo-element */
+.halloween-bg::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position it absolutely within the parent */
+    top: 0; /* Start from the top */
+    left: 0; /* Start from the left */
+    right: 0; /* Stretch to the right */
+    bottom: 0; /* Stretch to the bottom */
+    background-color: rgba(24, 22, 22, 0.619); /* Black with 50% opacity */
+    z-index: 1; /* Ensure it sits above the background image */
+}
+
+.halloween-bg * {
+    position: relative; /* Ensure child elements are above the overlay */
+    z-index: 2; /* Higher z-index to place above the overlay */
+}
+
+.halloween-logo {
+    font-family: 'DeadFall', sans-serif;
+    font-size: 7rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(185, 46, 0);
+}
+
+.halloween-button {
+    background-color: #FF5722; /* Halloween button color */
+    color: #FFFFFF; /* Button text color */
+}
+
+/* Typing effect for the subtext */
+.halloween-typing {
+    font-family: 'Lateef', regular;
+    font-size: 3rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(218, 0, 0); 
+    border-right: 3px solid rgb(36, 23, 12); /* Caret effect */
+    animation: typing 3s steps(30, end) forwards, blink-caret 0.80s step-end infinite;
+    animation-delay: 0s, 3s; /* Delay for caret blinking */
+}
+
+/* CTA section styles for centering */
+.cta-section {
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-top: 20px; /* Margin above the CTA */
+}
+
+/* Button styles for the Halloween theme */
+.halloween-button {
+    background-color: #551105; /* Sandy brown color for a spooky vibe */
+    color: #fff; /* Light text color for better contrast */
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 2rem; /* Adjust font size as needed */
+    font-family: 'Lateef', regular;
+    font-weight: bold; 
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Button hover effect */
+.halloween-button:hover {
+    background-color: #640303; /* Darker brown shade on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Shadow effect on hover for more depth */
+}
+
+/* Typing animation keyframes */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Blinking caret animation keyframes */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: rgb(0, 0, 0); /* Orange color for caret */
+    }
+}
+
+@font-face {
+    font-family: 'DeadFall';
+    src: url('/fonts/DeadFall-Regular.ttf') format('truetype'); /* Adjust the path as needed */
+    font-weight: normal;
+    font-style: normal;
+}

@@ -15,12 +15,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import axios from "axios";
+
 const Header = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [openDialog, setOpenDialog] = useState(false);
+
   useEffect(() => {
     console.log(user);
   }, []);
+
   const GetUserProfile = (tokenInfo) => {
     axios
       .get(
@@ -42,18 +45,22 @@ const Header = () => {
         console.error("Error fetching user profile:", error);
       });
   };
+
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => GetUserProfile(tokenResponse),
     onError: (error) => console.log(error),
   });
+
   return (
     <header className="flex justify-between items-center px-8 py-4 shadow-md bg-white">
       <div>
-        <img className="w-24 h-auto" src="/logo.png" alt="Logo" />
+        <a href="/">
+          <img className="w-24 h-auto" src="/logo.png" alt="Logo" />
+        </a>
       </div>
       {user ? (
-        <div className="flex items-cetner gap-x-3">
-          <a href = "/my-trip">
+        <div className="flex items-center gap-x-3">
+          <a href="/my-trip">
             <Button variant="outline" className="rounded-full">
               My Trips
             </Button>

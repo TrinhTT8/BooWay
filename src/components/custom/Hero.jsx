@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
-import './OriginalTheme.css';
+import './OriginalTheme.css'; // Ensure this is your default stylesheet
+import './Halloween.css'; // This will contain your Halloween styles
 
 const Hero = () => {
-  const [isHalloween, setIsHalloween] = useState(false);
+  const [isHalloween, setIsHalloween] = useState(false); // Default is not Halloween
 
   useEffect(() => {
     // Fade-in effect without scroll dependency
@@ -32,17 +33,17 @@ const Hero = () => {
     <div className={`flex items-center justify-center min-h-screen ${isHalloween ? 'halloween-bg' : 'original-bg'}`}>
       <div className={`text-center p-6 rounded-lg ${isHalloween ? 'halloween-hero' : 'original-hero'}`}>
         {/* Title */}
-        <h1 className="hero-title logo mb-4">BooWay</h1>
+        <h1 className={`hero-title logo mb-4 ${isHalloween ? 'halloween-logo' : 'original-logo'}`}>BooWay</h1>
         
         {/* Subtext */}
-        <p className="typing-text hero-description mb-8">We Take You Places.</p>
+        <p className={`typing-text hero-description mb-8 ${isHalloween ? 'halloween-typing' : 'original-typing'}`}>We Take You Places.</p>
         
         {/* Call to Action Button */}
-        <div className="cta-section">
+        <div className={`cta-section`}>
           <Link to="/create-trip">
             <Button 
-              variant={isHalloween ? 'destructive' : 'default'} 
-              className="py-4 px-8 text-lg font-regular transition duration-300 ease-in-out hover:shadow-lg hover:bg-opacity-80">
+              className={`original-button ${isHalloween ? 'halloween-button' : 'original-button'}`}
+              style={{ fontSize: '1.5rem' }}> {/* Adjust size as needed */}
               Venture Now
             </Button>
           </Link>
@@ -51,9 +52,8 @@ const Hero = () => {
 
       {/* Theme Toggle Button */}
       <button
-        onClick={() => setIsHalloween((prev) => !prev)}
-        className={`fixed bottom-5 right-5 p-3 rounded-full ${isHalloween ? 'bg-black text-white' : 'bg-orange-500 text-black'} transition-all duration-300 z-50`}
-      >
+        onClick={() => setIsHalloween(prev => !prev)}
+        className={`fixed bottom-5 right-5 p-3 rounded-full ${isHalloween ? 'bg-black text-white' : 'bg-orange-500 text-black'} transition-all duration-300 z-50`}>
         Switch to {isHalloween ? "Original Theme" : "Halloween Theme"}
       </button>
     </div>
