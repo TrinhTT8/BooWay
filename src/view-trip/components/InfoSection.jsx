@@ -36,15 +36,15 @@ const InfoSection = ({ trip }) => {
           🗺️ {trip?.userChoice?.location?.label}
         </div>
         <div className="text-xl mb-1 flex items-center">
-          📅 <span className="font-semibold ml-2">:&nbsp</span>
+          📅 <span className="font-semibold ml-2">:&nbsp;</span>
           {trip?.userChoice?.noOfDays} days
         </div>
         <div className="text-xl mb-1 flex items-center">
-          💰 <span className="font-semibold ml-2">:&nbsp</span>
+          💰 <span className="font-semibold ml-2">:&nbsp;</span>
           {trip?.userChoice?.budget}
         </div>
         <div className="text-xl flex items-center">
-          👥 <span className="font-semibold ml-2">&nbsp</span>
+          👥 <span className="font-semibold ml-2">&nbsp;</span>
           {trip?.userChoice?.noOfPeople}
         </div>
       </div>
