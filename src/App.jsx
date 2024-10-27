@@ -1,13 +1,14 @@
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
+import { useState } from "react";
+import Hero from "./components/custom/Hero";
 
 function App() {
-  return(
-    <>
-      <Header/>
-      <Footer/>
-    </>
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="bg-[url('/bg.jpg')] bg-cover min-h-screen">
+      <Hero />
+    </div>
   );
 }
 
-export default App; 
+export default App;
