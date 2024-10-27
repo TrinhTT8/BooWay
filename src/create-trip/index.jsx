@@ -30,6 +30,7 @@ const CreateTrip = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState([]);
+  const [selectedHalloween, setSelectedHalloween] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (name, value) => {
@@ -52,12 +53,11 @@ const CreateTrip = () => {
 
   const onGenerateTrip = async () => {
     const user = localStorage.getItem("user");
-  
     if (!user) {
       setOpenDialog(true);
       return;
     }
-  
+
     if (formData?.noOfDays > 7) {
       toast("Please enter no. of days less than 8");
       return;
@@ -72,7 +72,7 @@ const CreateTrip = () => {
       return;
     }
     setLoading(true);
-  
+
     let FINAL_PROMPT;
     if (formData.noOfPeople === "Any group size") {
       FINAL_PROMPT = HALLOWEEN_PROMPT.replace(
@@ -93,13 +93,12 @@ const CreateTrip = () => {
         .replace("{budget}", formData?.budget)
         .replace("{totalDays}", formData?.noOfDays);
     }
-  
+
     const result = await chatSession.sendMessage(FINAL_PROMPT);
     console.log("--", result?.response?.text());
     setLoading(false);
     SaveAiTrip(result?.response?.text());
   };
-  
 
   const GetUserProfile = (tokenInfo) => {
     axios
@@ -216,8 +215,11 @@ const CreateTrip = () => {
                 formData?.noOfPeople === item.people
                   ? "shadow-lg bg-blue-600 text-white"
                   : "bg-white"
-              }`}
-              onClick={() => handleInputChange("noOfPeople", item.people)}
+              } ${index === 4 && selectedHalloween ? "halloween-box" : ""}`}
+              onClick={() => {
+                handleInputChange("noOfPeople", item.people);
+                setSelectedHalloween(index === 4);
+              }}
             >
               <div className="flex items-center justify-center">
                 <div className="text-4xl mr-2">{item.icon}</div>
