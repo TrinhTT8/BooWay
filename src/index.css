@@ -67,3 +67,49 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Halloween Theme Styles */
+.halloween-box {
+  background-color: #1a1a1a;
+  color: #ff6600;
+  border: 2px solid #ff6600;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Bat Animation */
+@keyframes fly-around {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(5deg);
+  }
+}
+
+@keyframes moveBat {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.bat-animation {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+.bat-icon {
+  animation: moveBat 2s infinite;
+}
