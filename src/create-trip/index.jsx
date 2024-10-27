@@ -7,6 +7,7 @@ import {
   AI_PROMPT,
   SelectBudgetOptions,
   SelectTravelList,
+  HALLOWEEN_PROMPT,
 } from "@/constants/options";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -51,12 +52,12 @@ const CreateTrip = () => {
 
   const onGenerateTrip = async () => {
     const user = localStorage.getItem("user");
-
+  
     if (!user) {
       setOpenDialog(true);
       return;
     }
-
+  
     if (formData?.noOfDays > 7) {
       toast("Please enter no. of days less than 8");
       return;
@@ -71,20 +72,34 @@ const CreateTrip = () => {
       return;
     }
     setLoading(true);
-    const FINAL_PROMPT = AI_PROMPT.replace(
-      "{location}",
-      formData?.location?.label
-    )
-      .replace("{totalDays}", formData?.noOfDays)
-      .replace("{traveler}", formData?.noOfPeople)
-      .replace("{budget}", formData?.budget)
-      .replace("{totalDays}", formData?.noOfDays);
-
+  
+    let FINAL_PROMPT;
+    if (formData.noOfPeople === "Any group size") {
+      FINAL_PROMPT = HALLOWEEN_PROMPT.replace(
+        "{location}",
+        formData?.location?.label
+      )
+        .replace("{totalDays}", formData?.noOfDays)
+        .replace("{traveler}", formData?.noOfPeople)
+        .replace("{budget}", formData?.budget)
+        .replace("{totalDays}", formData?.noOfDays);
+    } else {
+      FINAL_PROMPT = AI_PROMPT.replace(
+        "{location}",
+        formData?.location?.label
+      )
+        .replace("{totalDays}", formData?.noOfDays)
+        .replace("{traveler}", formData?.noOfPeople)
+        .replace("{budget}", formData?.budget)
+        .replace("{totalDays}", formData?.noOfDays);
+    }
+  
     const result = await chatSession.sendMessage(FINAL_PROMPT);
     console.log("--", result?.response?.text());
     setLoading(false);
     SaveAiTrip(result?.response?.text());
   };
+  
 
   const GetUserProfile = (tokenInfo) => {
     axios
