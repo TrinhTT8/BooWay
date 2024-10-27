@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Parallax } from "react-scroll-parallax"; // Ensure this is installed
-
-gsap.registerPlugin(ScrollTrigger);
+import './OriginalTheme.css';
 
 const Hero = () => {
+  const [isHalloween, setIsHalloween] = useState(false);
+
+  gsap.registerPlugin(ScrollTrigger);
+
   useEffect(() => {
     gsap.fromTo(
       ".hero-title",
@@ -58,45 +61,36 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-white h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden ">
-      {/* Parallax Background Image */}
-      <Parallax className="absolute top-0 left-0 w-full h-full" y={[-50, 50]}>
-        <img
-          src="/bg.jpg"
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-      </Parallax>
+    <div className={`text-white h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden ${isHalloween ? 'halloween-bg' : 'original-bg'}`}>
+    <div className={`absolute top-0 left-0 w-full h-full ${isHalloween ? 'halloween-bg' : 'original-bg'}`}></div>
+
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-[#dcebfe] to-yellow-100 bg-opacity-50 p-6 rounded-lg shadow-md">
-        <div className="relative z-10 text-center mb-12 text-black">
-          <h1 className="text-5xl font-extrabold hero-title mb-4 ">
-            Discover Your Perfect Trip with Globe Guru
-          </h1>
-          <p className="text-xl hero-description mb-3 font-semibold">
-            Globe Guru is your ultimate AI-powered travel companion. Tell us
-            your travel preferences, and we'll craft the perfect itinerary just
-            for you.
-          </p>
-          <p className="text-xl hero-description mb-8 font-semibold">
-            Scroll down to start planning
-          </p>
+      <div className={`relative p-6 rounded-lg ${isHalloween ? 'halloween-hero' : 'original-hero'}`}>
+        <div className={`relative z-10 text-center mb-12 ${isHalloween ? 'text-white' : 'text-black'}`}>
+          <h1 className="logo">BooWay</h1>
+          <p className="typing-text">We Take You Places.</p>
         </div>
 
-        {/* Call to Action Section */}
-        <div className="cta-section relative z-10 text-center mb-12">
-          <p className="text-lg mb-4 font-semibold text-black">
-            Ready to start planning your dream vacation? Share your travel
-            destination, days, budget, and travel group preferences with us.
-          </p>
-          <Link to="/create-trip">
-            <Button className="py-3 px-6 text-lg font-bold bg-orange-500 hover:bg-orange-600">
-              Start Planning Now
-            </Button>
-          </Link>
+      {/* Call to Action Button */}
+      <div className="cta-section">
+        <Link to="/create-trip">
+          <Button 
+            variant={isHalloween ? 'destructive' : 'default'} // Set variant based on theme
+            className="py-4 px-8 text-lg font-regular transition duration-300 ease-in-out hover:shadow-lg hover:bg-opacity-80">
+            Venture Now
+          </Button>
+        </Link>
         </div>
       </div>
+
+      {/* Theme Toggle Button */}
+      <button
+        onClick={() => setIsHalloween((prev) => !prev)}
+        className={`fixed bottom-5 right-5 p-3 rounded-full ${isHalloween ? 'bg-black text-white' : 'bg-orange-500 text-black'} transition-all duration-300 z-50`}
+      >
+        Switch to {isHalloween ? "Original Theme" : "Halloween Theme"}
+      </button>
     </div>
   );
 };
