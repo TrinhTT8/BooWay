@@ -6,19 +6,19 @@ import { Link } from "react-router-dom";
 const UserTripCardItem = ({ trip }) => {
   const [photoURL, setPhotoURL] = useState();
 
-  const GetPlacePhoto = async () => {
+ const GetPlacePhoto = async () => {
     const data = {
-      textQuery: trip?.userChoice?.location?.label,
+        textQuery: trip?.userChoice?.location?.label,
     };
-    const result = await GetPlaceDetails(data).then((resp) => {
-      console.log(resp.data.places[1].photos[1].name);
-      const Url = PHOTO_REF_URL.replace(
-        "{NAME}",
-        resp.data.places[1].photos[1].name
-      );
-      setPhotoURL(Url);
-    });
-  };
+    const result = await GetPlaceDetails(data);
+    if (result.data.places.length > 0 && result.data.places[0].photos && result.data.places[0].photos.length > 0) {
+        const photoName = result.data.places[0].photos[0].name; // Use the first photo of the first place
+        const Url = PHOTO_REF_URL.replace("{NAME}", photoName);
+        setPhotoURL(Url);
+    } else {
+        console.log("No photos found for this location.");
+    }
+};
   useEffect(() => {
     trip && GetPlacePhoto();
   }, [trip]);
