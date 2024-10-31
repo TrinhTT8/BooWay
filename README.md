@@ -1,10 +1,13 @@
-1. Clone the repository and create a file called '.env.local' 
+Welcome to BooWay!
 
-2. Copy Paste this into '.env.local' and replace the APIs with your own APIs:<br/></br>
-    VITE_GOOGLE_PLACE_API_KEY="YOUR-GOOGLE-PLACE-API"<br/>
-    VITE_GOOGLE_GEMINI_AI_API_KEY="YOUR-GOOGLE-GEMINI-AI-API-KEY"<br/>
-    VITE_GOOGLE_AUTH_CLIENT_ID="YOUR-GOOGLE-AUTH-CLIENT-ID"<br/>
-    FIREBASE_API_KEY="YOUR-FIREBASE-API-KEY"<br/>
+BooWay is your **favorite** AI travel planner! Why search through thousands of websites to plan your trip when AI can do it with just a click of a button?
 
-3. run the app: 
-    npm run dev 
+Our goal is to save the users time, energy, and stress from a moment away to enjoy their vacation or holidays!
+
+Special note: We have modified the website to fit with the Halloween theme. Users can now choose to explore "haunted" places!
+
+-- My team and I developed this project in 24 hours for HackUNT 2024! --
+-- Members: Kim Vo, Linh Tran, Elisabeth Nguyen and me :)
+
+Check out this link to see how it works: https://devpost.com/software/booway
+
